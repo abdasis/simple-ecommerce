@@ -10,10 +10,7 @@
   <link rel="stylesheet" href=" {{ url('/') }}/assets/modules/fontawesome/css/all.min.css">
 
   <!-- CSS Libraries -->
-  <link rel="stylesheet" href=" {{ url('/') }}/assets/modules/jqvmap/dist/jqvmap.min.css">
-  <link rel="stylesheet" href=" {{ url('/') }}/assets/modules/weather-icon/css/weather-icons.min.css">
-  <link rel="stylesheet" href=" {{ url('/') }}/assets/modules/weather-icon/css/weather-icons-wind.min.css">
-  <link rel="stylesheet" href=" {{ url('/') }}/assets/modules/summernote/summernote-bs4.css">
+  @yield('plugin-css')
 
   <!-- Template CSS -->
   <link rel="stylesheet" href=" {{ url('/') }}/assets/css/style.css">
@@ -231,7 +228,11 @@
           </li>
           <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
             <img alt="image" src=" {{ url('/') }}/assets/img/avatar/avatar-1.png" class="rounded-circle mr-1">
-            <div class="d-sm-none d-lg-inline-block">Hi, Ujang Maman</div></a>
+            <div class="d-sm-none d-lg-inline-block">Hi, @if(Auth::check())
+              {{ Auth::user()->name }}
+            @else
+              Guest Account
+            @endif</div></a>
             <div class="dropdown-menu dropdown-menu-right">
               <div class="dropdown-title">Logged in 5 min ago</div>
               <a href="features-profile.html" class="dropdown-item has-icon">
@@ -244,7 +245,7 @@
                 <i class="fas fa-cog"></i> Settings
               </a>
               <div class="dropdown-divider"></div>
-              <a href="#" class="dropdown-item has-icon text-danger">
+              <a href="{{ route('user.logout') }}" class="dropdown-item has-icon text-danger">
                 <i class="fas fa-sign-out-alt"></i> Logout
               </a>
             </div>
@@ -281,12 +282,7 @@
   <script src=" {{ url('/') }}/assets/js/stisla.js"></script>
   
   <!-- JS Libraies -->
-  <script src=" {{ url('/') }}/assets/modules/simple-weather/jquery.simpleWeather.min.js"></script>
-  <script src=" {{ url('/') }}/assets/modules/chart.min.js"></script>
-  <script src=" {{ url('/') }}/assets/modules/jqvmap/dist/jquery.vmap.min.js"></script>
-  <script src=" {{ url('/') }}/assets/modules/jqvmap/dist/maps/jquery.vmap.world.js"></script>
-  <script src=" {{ url('/') }}/assets/modules/summernote/summernote-bs4.js"></script>
-  <script src=" {{ url('/') }}/assets/modules/chocolat/dist/js/jquery.chocolat.min.js"></script>
+@yield('plugin-js')
 
   <!-- Page Specific JS File -->
   <script src=" {{ url('/') }}/assets/js/page/index-0.js"></script>
