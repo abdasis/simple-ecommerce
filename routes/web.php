@@ -20,3 +20,6 @@ Route::group(['prefix' => 'store'], function () {
     Route::get('add-store', 'StoreController@create')->name('store.create');
     Route::post('add-store', 'StoreController@add')->name('store.add');
 });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
