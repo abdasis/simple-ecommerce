@@ -7,32 +7,43 @@
 @section('content')
 <div class="row">
         <div class="col-md-6">
-            <form action=" {{ route('product.create') }} " method="post">  
+            <form action=" {{ route('product.store') }} " method="post">  
             <div class="card">
                 <div class="card-header">
                   <h4>Add Product</h4>
                 </div>
                 <div class="card-body">
                     @csrf
-                    <div class="form-group ">
-                        <label>Name</label>
-                        <div class="input-group  {{ $errors->has('name') ? ' is-invalid' : '' }}">
-                            <div class="input-group-prepend">
-                            <div class="input-group-text">
-                                <i class="fas fa-user"></i>
-                            </div>
-                            </div>
-                            <input type="text" name="name" class="form-control" required value=" {{ old('name') }} ">
-                        </div>
+                    <div class="form-group">
+                        <label>Select Store</label>
+                        <select class="form-control select2 {{ $errors->has('store_id') ? 'is-invalid' : '' }}" name="store_id">
+                            <option value="">Pilih Store</option>
+                            @foreach ($stores as $store)
+                            <option value="{{ $store->id }}">{{ $store->id  }} | {{ $store->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Nama Product</label>
+                        <input type="text" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" placeholder="Masukan Nama Product" name="name" value="{{ old('name') }}">
                         <small class="text-danger">{{ $errors->first('name') }}</small>
                     </div>
+
+                    <div class="form-group">
+                        <label>Price</label>
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <div class="input-group-text">
+                              IDR
+                            </div>
+                          </div>
+                          <input type="text" name="price" class="form-control {{ $errors->has('price') ? 'is-invalid' : ''}}" value="{{ old('price') }}" placeholder="Masukan Harga Barang">
+                        </div>
+                        <small class="text-danger">{{ $errors->first('price') }}</small>
+                      </div>
                   <div class="form-group">
-                    <label>Address</label>
-                    <textarea name="address" cols="30" rows="30" class="form-control  {{ $errors->has('address') ? ' is-invalid' : '' }}"></textarea>
-                    <small class="text-danger">{{ $errors->first('address') }}</small>
-                  </div>
-                  <div class="form-group">
-                      <button type="submit" class="btn btn-info"> <i class="fa fa-save"></i> Save Store</button>
+                      <button type="submit" class="btn btn-info"> <i class="fa fa-save"></i> Save Product</button>
                   </div>
               </div>
         </div>    
@@ -58,10 +69,10 @@
 @endsection
 
 @section('plugin-css')
-<link rel="stylesheet" href="{{url('/')}}assets/modules/bootstrap-daterangepicker/daterangepicker.css">
-<link rel="stylesheet" href="{{url('/')}}assets/modules/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css">
-<link rel="stylesheet" href="{{url('/')}}assets/modules/select2/dist/css/select2.min.css">
-<link rel="stylesheet" href="{{url('/')}}assets/modules/jquery-selectric/selectric.css">
-<link rel="stylesheet" href="{{url('/')}}assets/modules/bootstrap-timepicker/css/bootstrap-timepicker.min.css">
-<link rel="stylesheet" href="{{url('/')}}assets/modules/bootstrap-tagsinput/dist/bootstrap-tagsinput.css">
+<link rel="stylesheet" href="{{url('/')}}/assets/modules/bootstrap-daterangepicker/daterangepicker.css">
+<link rel="stylesheet" href="{{url('/')}}/assets/modules/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css">
+<link rel="stylesheet" href="{{url('/')}}/assets/modules/select2/dist/css/select2.min.css">
+<link rel="stylesheet" href="{{url('/')}}/assets/modules/jquery-selectric/selectric.css">
+<link rel="stylesheet" href="{{url('/')}}/assets/modules/bootstrap-timepicker/css/bootstrap-timepicker.min.css">
+<link rel="stylesheet" href="{{url('/')}}/assets/modules/bootstrap-tagsinput/dist/bootstrap-tagsinput.css">
 @endsection
